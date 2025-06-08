@@ -1,4 +1,4 @@
-# 🎮 Tic-Tac-Toe in C++
+# 🎮 Tic-Tac-Toe
 
 This is a simple 2-player Tic-Tac-Toe game built using C++ for the terminal.
 
