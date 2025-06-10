@@ -84,13 +84,13 @@ void game()
 {
     int slot;
     int error;
-    int j = 0;
+    int i,j = 0;
     cout << "Player 1  --  " << player[0] << endl;
     cout << "Player 2  --  " << player[1] << endl;
 
     drawbord();
 
-    for (int i = 0; i < 9; i++)
+    for ( i = 0; i < 9; i++)
     {
         while (1)
         {
@@ -126,6 +126,9 @@ void game()
 
         changeplayer();
     }
+
+    if(i==9)
+        cout<<"It's a draw"<<endl;
 }
 
 int main()
