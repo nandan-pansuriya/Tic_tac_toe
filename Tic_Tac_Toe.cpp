@@ -116,6 +116,8 @@ void game()
             }
         }
         
+        
+
         drawbord();
 
         if(check_winner())
