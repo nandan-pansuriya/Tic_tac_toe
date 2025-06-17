@@ -1,26 +1,43 @@
 #include <iostream>
 using namespace std;
 
-char bord[3][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
+char board[3][3] = {{'1', '2', '3'}, {'4', '5', '6'}, {'7', '8', '9'}};
 char player[2];
 char usedslot[9] = {};
 int currentplayer;
 
-void drawbord()
+void setcolor(const string& color_no)
+{
+    cout << "\033["<<color_no<<"m";
+}
+
+
+void drawboard()
 {
     cout << endl;
     for (int i = 0; i < 3; i++)
     {
         for (int j = 0; j < 3; j++)
         {
-            cout << " " << bord[i][j];
+            cout<<" ";
+            if(board[i][j] == 'X')
+                setcolor("31");
+            else if(board[i][j] =='O')
+                setcolor("32");
+            else
+                setcolor("0");
+            
+            cout<< board[i][j];
+            setcolor("0");
+
             if (j < 2)
                 cout << " |";
+            
         }
         cout << endl;
 
         if (i < 2)
-            cout << "-----------" << endl;
+            cout << "---+---+---" << endl;
     }
 
     cout << endl;
@@ -56,25 +73,25 @@ int valid_slot(int slot)
         return 0;
 }
 
-void update_bord(int pos, char sign)
+void update_board(int pos, char sign)
 {
     pos--;
-    bord[pos / 3][pos % 3] = sign;
+    board[pos / 3][pos % 3] = sign;
 }
 
 int check_winner()
 {
     for(int i=0;i<3;i++)
     {
-        if(bord[i][0]==bord[i][1] && bord[i][1]==bord[i][2])
+        if(board[i][0]==board[i][1] && board[i][1]==board[i][2])
             return 1;
-        if (bord[0][i]==bord[1][i] && bord[1][i]==bord[2][i])
+        if (board[0][i]==board[1][i] && board[1][i]==board[2][i])
             return 1; 
     }
 
-    if(bord[0][0]==bord[1][1] && bord[1][1]==bord[2][2])
+    if(board[0][0]==board[1][1] && board[1][1]==board[2][2])
         return 1;
-    else if(bord[0][2]==bord[1][1] && bord[1][1]==bord[2][0])
+    else if(board[0][2]==board[1][1] && board[1][1]==board[2][0])
         return 1;
     else   
         return 0;
@@ -88,7 +105,7 @@ void game()
     cout << "Player 1  --  " << player[0] << endl;
     cout << "Player 2  --  " << player[1] << endl;
 
-    drawbord();
+    drawboard();
 
     for ( i = 0; i < 9; i++)
     {
@@ -111,14 +128,14 @@ void game()
             else
             {
                 usedslot[j++] = slot+48;
-                update_bord(slot, player[currentplayer]);
+                update_board(slot, player[currentplayer]);
                 break;
             }
         }
         
         
 
-        drawbord();
+        drawboard();
 
         if(check_winner())
         {
